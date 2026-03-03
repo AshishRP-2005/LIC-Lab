@@ -17,12 +17,22 @@ A **MOSFET (Metal-Oxide-Semiconductor Field-Effect Transistor)** controls curren
 
 A **Common Source (CS) amplifier** uses the source terminal as the common reference. It provides voltage gain and introduces a 180° phase shift between input and output.
 
+## Procedure
+1. Design the CS amplifier circuit using LTSpice.
+2. Connect the required components as per the circuit diagram.
+3. Perform DC analysis to determine the biasing conditions.
+4. Perform transient analysis to study the time-domain response.
+5. Perform AC analysis to extract gain and frequency response characteristics.
+6. Record observations and extract relevant parameters.
+   
+## Circuit
+<img src="images/img1.png" width="80%">
 ---
 
 # DC Analysis
 
 ## Operating Point
-
+<img src="images/DCop.png" width="80%">
 From simulation:
 
 - **Drain Current (ID)** = 6.85 µA  
@@ -43,6 +53,27 @@ Since VDS is much greater than (VGS − VT), the MOSFET operates in saturation.
 ( VDS ≈ 0.9 V , ID ≈ 6.85 µA )
 
 ---
+## DC Sweep
+
+### Perform DC Sweep Analysis
+1. Go to:
+   Simulate → Edit Configure Analysis → DC Sweep
+2. Select:
+   - Sweep Variable: Voltage source (Vin)
+   - Start: 0 V
+   - Stop: 1.8 V
+   - Step: 0.01 V
+3. Run simulation.
+4. Plot V(out) vs Vin.
+5. Identify:
+   - Steepest curve (for different RD values).
+6. Choose midpoint:
+   Vout ≈ VDD/2 = 0.9 V
+7. Note corresponding Vin → DC Offset (0.549 V).
+
+<img src="images/sweep1.png" width="80%">
+<img src="images/sweep2.png" width="80%">
+---
 
 ## Effect of Parameters
 
@@ -50,12 +81,14 @@ Since VDS is much greater than (VGS − VT), the MOSFET operates in saturation.
 - Increasing RD increases gain  
 - Bandwidth decreases  
 - Demonstrates gain–bandwidth tradeoff  
+<img src="images/varyingR.png" width="80%">
 
 ### Varying W
 - Increasing transistor width increases ID  
 - Transconductance (gm) increases  
 - Gain increases  
 - Q-point shifts
+<img src="images/VaryingW.png" width="80%">
 
 ---
 
@@ -67,6 +100,8 @@ SIN(0.549 10m 1k)
 - DC offset = 0.549 V  
 - Amplitude = 10 mV  
 - Frequency = 1 kHz  
+
+<img src="images/Transient.png" width="80%">
 
 ### Results
 - Output is inverted (180° phase shift)  
@@ -87,6 +122,8 @@ AC Command:
 
 
 .ac dec 100 1 1G
+
+<img src="images/AC.png" width="80%">
 
 ### Key Results
 
